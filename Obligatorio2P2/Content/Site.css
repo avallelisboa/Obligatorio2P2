@@ -22,3 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
+
+footer{
+    background-color:black;
+    padding:5px;
+}
+.form-data{
+    display:inline-block;
+    width: 100%;
+}
+#textBottom {
+    color: white;
+}
