@@ -17,8 +17,8 @@ namespace ShopSystem
         public int Id { get { return id; } set { id = value; } }
         public int StockId { get { return stockId; } }
         public string Name { get { return name; } }
-        public int Price { get { return price; } }
-        public string Description { get { return description; } }
+        public int Price { get { return price; } set { price = value; } }
+        public string Description { get { return description; } set { description = value; } }
         public int Quantity { get { return quantity; } }
         public bool IsExclusive { get { return isExclusive; } }
 

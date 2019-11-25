@@ -100,5 +100,15 @@ namespace ShopSystem
                 return "Products added";
             }
         }
+
+        public void changeProductPrice(int productId, int productPrice)
+        {
+            products[productId].Price = productPrice;
+        }
+
+        public void changeProductDescription(int productId, string description)
+        {
+            products[productId].Description = description;
+        }
     }
 }

@@ -266,5 +266,15 @@ namespace ShopSystem
             DateTime date = client.getDateLastPurchase();
             return date;
         }
+
+        public void changeProductdPrice(int productStockId, int productId, int productPrice)
+        {
+            catalogue[productStockId].changeProductPrice(productId, productPrice);
+        }
+
+        public void changeProductDescription(int productStockId, int productId, string productDescription)
+        {
+            catalogue[productStockId].changeProductDescription(productId, productDescription);
+        }
     }
 }
