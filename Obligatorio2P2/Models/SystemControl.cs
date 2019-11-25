@@ -132,13 +132,25 @@ namespace ShopSystem
 
         public void preLoad()
         {
-            addCommonClient("Jorge", 45876212, "091425631", "jorgito@gmail.com", "Bulevar Artigas 87546", "jorge", "jorge", true);        //Nombre, CI, celular, mail, dirección, usuario, contraseña, esDeMonevideo?
+            addUser("jorge", "jorge", "jorge", "client");
+            addCommonClient("Jorge", 45876212, "091425631", "jorgito@gmail.com", "Bulevar Artigas 87546", "jorge", "jorge", true);                                              //Nombre, CI, celular, mail, dirección, usuario, contraseña, esDeMonevideo?
+            users[0].setClient(clients[0]);
+            addUser("javier", "javier", "javier", "client");
             addCommonClient("Javier", 54789653, "091879564", "javier@gmail.com", "Bulevar Artigas 97463", "javier", "javier", true);
+            users[1].setClient(clients[1]);
+            addUser("Juan", "Juan", "Juan", "client");
             addCommonClient("Juan", 16549829, "091879564", "juan@gmail.com", "Bulevar Artigas 1087465", "juan", "juan", false);
+            users[2].setClient(clients[2]);
 
+            addUser("company1", "company1", "company1", "client");
             addCompanyClient("company1", "company1 s.a.", 154684654, "company1@gmail.com", "25842143579", "Luis Alberto de Herrera 154843223", "company1", "company1", true, 3); //nombre empresa, razón social, rut, mail, teléfono, address, usuario, contraseña, esDeMontevideo
+            users[3].setClient(clients[3]);
+            addUser("company2", "company2", "company2", "client");
             addCompanyClient("company2", "company2 s.a.", 878746845, "company2@gmail.com", "65487651321", "Luis Alberto de Herrera 648948455", "company2", "company2", true, 7);
+            users[4].setClient(clients[4]);
+            addUser("company3", "company3", "company3", "client");
             addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false, 5);
+            users[5].setClient(clients[5]);
 
             addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas(1 ProductStock para cada categoría)
 

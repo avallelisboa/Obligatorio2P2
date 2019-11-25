@@ -11,6 +11,9 @@ namespace Obligatorio2P2.Controllers
     {
         public ActionResult Index()
         {
+
+            SystemControl sys = SystemControl.getSystemControl();
+            sys.preLoad();
             return View();
         }
 
@@ -18,6 +21,14 @@ namespace Obligatorio2P2.Controllers
         public ActionResult Login(string user, string password)
         {
             SystemControl sys = SystemControl.getSystemControl();
+            if(sys.login(user, password))
+            {
+                return Content("<p>Inicio de sesión exitoso</p>");
+            }
+            else
+            {
+                return Redirect("/Home/Index");
+            }
             throw new NotImplementedException();
         }
     }

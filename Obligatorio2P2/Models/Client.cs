@@ -13,7 +13,7 @@ namespace ShopSystem
         private string mail;
         private DateTime registerDate;
         private bool isFromMontevideo;
-        private List<Purchase> purchases;
+        private List<Purchase> purchases = new List<Purchase>();
 
         public class clientValidation
         {
