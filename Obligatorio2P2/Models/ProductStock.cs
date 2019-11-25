@@ -9,7 +9,6 @@ namespace ShopSystem
         private List<Product> products = new List<Product>();
         private int stockId;
         private string name;
-        private int price;
         public class _product
         {
             public int id;
@@ -20,7 +19,6 @@ namespace ShopSystem
 
         public int StockId { get { return stockId; } }
         public string Name { get { return name; } }
-        public int Price { get { return price; } set { price = value; } }
         public List<Product> Products { get { return products; } }
         public int ProductsQuantity { get { return products.Count; } }
 

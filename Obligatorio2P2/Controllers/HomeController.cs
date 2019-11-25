@@ -32,11 +32,11 @@ namespace Obligatorio2P2.Controllers
                 switch (role)
                 {
                     case "client":
-                        return View("~/Views/Client/Client.cshtml");
+                        return Redirect("/Client/Index");
                     case "guest":
-                        return View("~/Views/Guest/Guest.cshtml");
+                        return Redirect("/Guest/Index");
                     case "admin":
-                        return View("~/Views/Admin/Admin.cshtml");
+                        return Redirect("/Admin/Index");
                     default:
                         throw new Exception("invalid role");
                 }

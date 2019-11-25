@@ -1,0 +1,38 @@
+﻿@model List<ShopSystem.ProductStock>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Client</title>
+</head>
+<body>
+    <header></header>
+    <article>
+        <section>
+            @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
+            {
+                <table>
+                    <tr>
+                        <td>@pS.Name</td>
+                        <td>@pS.StockId</td>
+                    </tr>
+                </table>
+                foreach (ShopSystem.Product p in pS.Products)
+                {
+                    <table>
+                        <tr>
+                            <td>@p.Name</td>
+                            <td>@p.Id</td>
+                        </tr>
+                    </table>
+                }
+            }
+        </section>
+    </article>
+</body>
+</html>
