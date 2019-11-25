@@ -192,10 +192,11 @@ namespace ShopSystem
             purchase6.buy();
         }
 
-        public bool login(string user, string password)
+        public User login(string user, string password)
         {
             bool wasFounded = false;
             bool isPasswordCorrect = false;
+            User _userLogged = null;
             foreach (User _user in users)
             {
                 if (_user.UserName == user)
@@ -203,11 +204,11 @@ namespace ShopSystem
                     wasFounded = true;
                     if (_user.Password == password) isPasswordCorrect = true;
                     loggedUser = _user;
+                    _userLogged = _user;
                     break;
                 }
             }
-            if (wasFounded && isPasswordCorrect) return true;
-            else return false;
+            return _userLogged;
         }
 
         public Purchase getPurchase()

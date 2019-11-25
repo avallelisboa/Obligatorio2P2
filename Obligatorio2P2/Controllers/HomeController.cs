@@ -21,9 +21,25 @@ namespace Obligatorio2P2.Controllers
         public ActionResult Login(string user, string password)
         {
             SystemControl sys = SystemControl.getSystemControl();
-            if(sys.login(user, password))
+            User dataUser = sys.login(user, password);
+            if (dataUser != null)
             {
-                return Content("<p>Inicio de sesión exitoso</p>");
+                string role = dataUser.Role;
+                Session["user"] = dataUser.UserName;
+                Session["name"] = dataUser.Name;
+                Session["role"] = role;
+
+                switch (role)
+                {
+                    case "client":
+                        return View("~/Views/Client/Client.cshtml");
+                    case "guest":
+                        return View("~/Views/Guest/Guest.cshtml");
+                    case "admin":
+                        return View("~/Views/Admin/Admin.cshtml");
+                    default:
+                        throw new Exception("invalid role");
+                }
             }
             else
             {
