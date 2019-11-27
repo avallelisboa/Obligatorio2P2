@@ -113,13 +113,16 @@ namespace ShopSystem
 
         public DateTime getDateLastPurchase()
         {
-            DateTime lastPurchaseDate;
-            int count = purchases.Count;
-            lastPurchaseDate = purchases[0].Date;
-            for (int i = 1; i < count; i++)
+            DateTime lastPurchaseDate = new DateTime();
+            int count = purchases.Count;            
+            for (int i = 0; i < count; i++)
             {
-                int result = DateTime.Compare(purchases[i].Date, purchases[i - 1].Date);
-                if (result > 0) lastPurchaseDate = purchases[i].Date;
+                if(i == 0) lastPurchaseDate = purchases[i].Date;
+                else
+                {
+                    int result = DateTime.Compare(purchases[i].Date, purchases[i - 1].Date);
+                    if (result > 0) lastPurchaseDate = purchases[i].Date;
+                }                
             }
             return lastPurchaseDate;
         }
