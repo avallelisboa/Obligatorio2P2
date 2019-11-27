@@ -9,10 +9,90 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Admin</title>
+    <title>Client</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(document).ready(function () {
+            $("#modifyProducts").click(modifyProducts);
+            $("#modifyClients").click(modifyClients);
+            $("#purchasesBetweenDates").click(purchasesBetweenDates);
+
+            function modifyProducts() {
+                $("#Products").show();
+                $("#Clients").hide();
+                $("#Purchases").hide();
+            }
+            function modifyClients() {
+                $("#Products").hide();
+                $("#Clients").show();
+                $("#Purchases").hide();
+            }
+            function purchasesBetweenDates() {
+                $("#Products").hide();
+                $("#Clients").hide();
+                $("#Purchases").show();
+            }
+        });
+    </script>
 </head>
 <body>
-    <div> 
-        Vista de admin
+    <nav>
+        <ul>
+            <li class="navButtons" id="modifyProducts">Modificar Productos</li>
+            <li class="navButtons" id="modifyClients">Modificar clientes</li>
+            <li class="navButtons" id="purchasesBetweenDates">Compras entre 2 fechas</li>
+            <li class="navButtons" id="logout"><a href="/Home/Logout">Salir</a></li>
+        </ul>
+    </nav>
+    <div id="Products">
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>IdProducto</th>
+                <th>Precio</th>
+                <th>Cantidad disponible</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>IdCategoría</th>
+            </tr>
+            @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
+            {
+                foreach (ShopSystem.Product p in pS.Products)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td>@p.Id</td>
+                        <td>@p.Price</td>
+                        <td>@p.Quantity</td>
+                        <td>@p.Description</td>
+                        <td>@pS.Name</td>
+                        <td>@pS.StockId</td>
+                    </tr>
+                }
+
+            }
+        </table>
+        <form class="form-control" action="/Admin/UpdatePrice" method="get">
+            id categoría<input name="stockId" type="number" />
+            id producto<input name="productId" type="number" />
+            nuevo precio<input name="newPrice" type="number" />
+            <button class="btn-primary">Actualizar precio</button>
+        </form>
+        <form class="form-control" action="/Admin/UpdateDescription" method="get">
+            id categoría<input name="stockId" type="number" />
+            id producto<input name="productId" type="number" />
+            nueva descripción<input name="newDescription" type="text" />
+            <button class="btn-primary">Actualizar descripción</button>
+        </form>
+    </div>
+    <div id="Clients">
+
+    </div>
+    <div id="Purchases"
+
     </div>
 </body>
 </html>

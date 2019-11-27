@@ -297,7 +297,7 @@ namespace ShopSystem
             return date;
         }
 
-        public void changeProductdPrice(int productStockId, int productId, int productPrice)
+        public void changeProductPrice(int productStockId, int productId, int productPrice)
         {
             catalogue[productStockId].changeProductPrice(productId, productPrice);
         }
