@@ -34,3 +34,16 @@ footer{
 #textBottom {
     color: white;
 }
+#Catalogue, #Last10Products {
+    display: none;
+}
+
+ul {
+    list-style-type: none;
+    display: inline;
+}
+
+nav{
+    display:inline;
+}
+

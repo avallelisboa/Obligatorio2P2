@@ -47,5 +47,13 @@ namespace Obligatorio2P2.Controllers
             }
             throw new NotImplementedException();
         }
+
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            Session["name"] = null;
+            Session["role"] = null;
+            return Redirect("/Home/Index");
+        }
     }
 }

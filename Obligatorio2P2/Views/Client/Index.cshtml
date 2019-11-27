@@ -7,32 +7,68 @@
 
 <html>
 <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Client</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(document).ready(function () {
+            $("#showCatalogue").click(showCatalogue);
+            $("#showPurchases").click(showPurchases);
+        });
+
+        function showCatalogue() {
+            $("#Last10Products").hide();
+            $("#Catalogue").show();
+        }
+        function showPurchases() {
+            $("#Catalogue").hide();
+            $("#Last10Products").show();
+        }
+    </script>
 </head>
 <body>
-    <header></header>
-    <article>
-        <section>
-            @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
-            {
-                <table>
-                    <tr>
-                        <td>@pS.Name</td>
-                        <td>@pS.StockId</td>
-                    </tr>
-                </table>
-                foreach (ShopSystem.Product p in pS.Products)
+    <header>
+        <nav>
+            <ul>
+                <li id="showCatalogue">Ver Catalogo</li>
+                <li id="showPurchases">Ver últimas 10 compras y artículo más comprado</li>
+                <li id="logout"><a href="/Home/Logout">Salir</a></li>
+            </ul>
+        </nav>        
+    </header>
+    <section>
+        <section id="Catalogue">
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>IdProducto</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>IdCategoría</th>
+                </tr>
+                @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
                 {
-                    <table>
+                    foreach (ShopSystem.Product p in pS.Products)
+                    {
                         <tr>
                             <td>@p.Name</td>
                             <td>@p.Id</td>
+                            <td>@p.Price</td>
+                            <td>@pS.Name</td>
+                            <td>@pS.StockId</td>
                         </tr>
-                    </table>
+                    }
+
                 }
-            }
+            </table>
         </section>
-    </article>
+        <section id="Last10Products">
+
+        </section>
+    </section>
 </body>
 </html>
