@@ -34,7 +34,7 @@ footer{
 #textBottom {
     color: white;
 }
-#Last10Products {
+#Last10Products, #Users, #Purchases {
     display: none;
 }
 
@@ -62,6 +62,9 @@ nav{
 #commonDiv{
     margin-top:30px;
 }
-#Clients, #Purchases{
+#Client{
+    display:block;
+}
+#AddUser{
     display:block;
 }

@@ -25,6 +25,7 @@ namespace ShopSystem
         }
 
         public int Id { get { return id; } }
+        public string Name { get { return name; } }
         public string Phone { get { return phone; } }
         public string Address { get { return address; } }
         public string Mail { get { return mail; } }
@@ -125,11 +126,6 @@ namespace ShopSystem
                 }                
             }
             return lastPurchaseDate;
-        }
-
-        public virtual string getName()
-        {
-            return "";
         }
 
         public override string ToString()

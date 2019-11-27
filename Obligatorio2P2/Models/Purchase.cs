@@ -30,6 +30,7 @@ namespace ShopSystem
         }
 
         public Client Client { get { return client; } }
+        public int TotalPrice { get { return totalPrice; } }
         public bool ToDeliver { get { return toDeliver; } set { toDeliver = value; } }
         public bool PaysByCash { get { return paysByCash; } set { paysByCash = value; } }
         public DateTime Date { get { return date; } }

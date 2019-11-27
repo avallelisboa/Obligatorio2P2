@@ -15,9 +15,24 @@ namespace Obligatorio2P2.Controllers
             if (Session["user"] != null && Convert.ToString(Session["role"]) == "admin")
             {
                 SystemControl sys = SystemControl.getSystemControl();
+                if(Session["d1"] != null && Session["d2"] != null)
+                {
+                    string d1 = Convert.ToString(Session["d1"]);
+                    string d2 = Convert.ToString(Session["d2"]);
+                    DateTime date1; DateTime date2;
+                    date1 = DateTime.Parse(d1);
+                    date2 = DateTime.Parse(d2);
+                    List<Purchase> purchasesBetweenDates = sys.getPurchasesBetweenDates(date1, date2);
+                    Session["purchasesBetweenDates"] = purchasesBetweenDates;
+                    ViewBag.purchasesBetweenDates = purchasesBetweenDates;
+                }
+               
+
                 User user = sys.Users[Convert.ToInt32(Session["id"])];
                 List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
+                List<User> users = sys.Users;
+                ViewBag.users = users;
                 return View();
             }
             else return Redirect("/Home");
@@ -34,6 +49,27 @@ namespace Obligatorio2P2.Controllers
         {
             SystemControl sys = SystemControl.getSystemControl();
             sys.changeProductDescription(stockId, productId, newDescription);
+            return Redirect("/Admin/Index");
+        }
+
+        public ActionResult UpdateClient(int userId, string role)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            throw new NotImplementedException();
+        }
+
+        public ActionResult CreateUser(string user, string password, string name, string role)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            List<User> _users = sys.Users;
+            sys.addUser(user, password, name, role);
+            return Redirect("/Admin/Index");
+        }
+
+        public ActionResult GetPurchasesBetweenDates(string d1, string d2)
+        {
+            Session["d1"] = d1;
+            Session["d2"] = d2;
             return Redirect("/Admin/Index");
         }
     }

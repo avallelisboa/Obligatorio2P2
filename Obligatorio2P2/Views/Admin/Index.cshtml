@@ -17,23 +17,33 @@
     <script>
         $(document).ready(function () {
             $("#modifyProducts").click(modifyProducts);
-            $("#modifyClients").click(modifyClients);
+            $("#modifyUsers").click(modifyUsers);
             $("#purchasesBetweenDates").click(purchasesBetweenDates);
+            $("#AddUser").click(addUser);
 
             function modifyProducts() {
                 $("#Products").show();
-                $("#Clients").hide();
+                $("#Users").hide();
                 $("#Purchases").hide();
+                $("#CreateUser").hide();
             }
-            function modifyClients() {
+            function modifyUsers() {
                 $("#Products").hide();
-                $("#Clients").show();
+                $("#Users").show();
                 $("#Purchases").hide();
+                $("#CreateUser").hide();
             }
             function purchasesBetweenDates() {
                 $("#Products").hide();
-                $("#Clients").hide();
+                $("#Users").hide();
                 $("#Purchases").show();
+                $("#CreateUser").hide();
+            }
+            function addUser() {
+                $("#Products").hide();
+                $("#Users").hide();
+                $("#Purchases").hide();
+                $("#CreateUser").show();
             }
         });
     </script>
@@ -42,12 +52,14 @@
     <nav>
         <ul>
             <li class="navButtons" id="modifyProducts">Modificar Productos</li>
-            <li class="navButtons" id="modifyClients">Modificar clientes</li>
-            <li class="navButtons" id="purchasesBetweenDates">Compras entre 2 fechas</li>
+            <li class="navButtons" id="modifyUsers">Modificar Usuario</li>
+            <li class="navButtons" id="AddUser">Agregar Usuario</li>
+            <li class="navButtons" id="purchasesBetweenDates">Compras entre fechas</li>
             <li class="navButtons" id="logout"><a href="/Home/Logout">Salir</a></li>
         </ul>
     </nav>
     <div id="Products">
+        <p><b>Modificar Productos</b></p>
         <table class="table">
             <tr>
                 <th>Nombre</th>
@@ -88,11 +100,88 @@
             <button class="btn-primary">Actualizar descripción</button>
         </form>
     </div>
-    <div id="Clients">
-
+    <div id="Users">
+        <p><b>Modificar Usuarios</b></p>
+        <table class="table">
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Id</th>
+                <th>Rol</th>
+                <th>IdCliente</th>
+            </tr>
+            @foreach(ShopSystem.User user in ViewBag.users)
+            {
+                <tr>
+                    <td>
+                        @user.UserName
+                    </td>
+                    <td>
+                        @user.Name
+                    </td>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>
+                        @user.Role
+                    </td>
+                    @if (user.Client != null)
+                    {
+                        <td>@user.Client.Id</td>
+                    }
+                </tr>
+            }
+        </table>
     </div>
-    <div id="Purchases"
-
+    <div id="CreateUser">
+        <p><b>Crear usuario</b></p>
+        <form action="/Admin/CreateUser">
+            usuario<input type="text" name="user" />
+            contraseña<input type="password" name="password" />
+            nombre<input type="text" name="name" />
+            rol<input type="text" name="role" />
+            <button>Crear usuario</button>
+        </form>
+    </div>
+    <div id="Purchases">
+         <p><b>Obtener compras entre las fechas</b></p>
+        <form action="/Admin/GetPurchasesBetweenDates" method="get">
+            fecha1<input type="date" name="d1" />
+            fecha2<input type="date" name="d2" />
+            <button class="btn-primary">Obtener compras</button>
+        </form>
+        @if(Session["purchasesBetweenDates"] != null)
+        {
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo de cliente</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+                @foreach (ShopSystem.Purchase p in ViewBag.purchasesBetweenDates)
+                {
+                    <tr>
+                        <td>
+                            @p.Client.Name
+                        </td>
+                        <td>
+                            @p.Client.ToString()
+                        </td>
+                        <td>
+                            @p.Date
+                        </td>
+                        <td>
+                            @p.ProductsQuantity
+                        </td>
+                        <td>
+                            @p.TotalPrice
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
     </div>
 </body>
 </html>
