@@ -76,6 +76,24 @@ namespace Obligatorio2P2.Controllers
             return Redirect("/Admin/Index");
         }
 
+        public ActionResult CreateCommonClient(string name, int identificationCard, string celular, string mail, string address, string user, string password, bool isFromMontevideo)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            List<User> _users = sys.Users;
+            SystemControl.registerStatus status = sys.addCommonClient(name, identificationCard, celular, mail, address, user, password, isFromMontevideo);
+            Session["message"] = status.message;
+            return Redirect("/Admin/Index");
+        }
+        [HttpPost]
+        public ActionResult CreateCompanyClient(string companyName, string bussinesName, int rut, string mail, string phone, string address, string user, string password, bool isFromMontevideo, int discount)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            List<User> _users = sys.Users;
+            SystemControl.registerStatus status = sys.addCompanyClient(companyName,bussinesName, rut, mail, phone, address, user, password, isFromMontevideo, discount);
+            Session["message"] = status.message;
+            return Redirect("/Admin/Index");
+        }
+        [HttpPost]
         public ActionResult CreateProduct(int catalogueId, string productName, int price, string description, bool isExclusive, int quantity)
         {
             SystemControl sys = SystemControl.getSystemControl();

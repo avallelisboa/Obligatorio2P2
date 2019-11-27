@@ -65,6 +65,6 @@ nav{
 #Client{
     display:block;
 }
-#Users, #Purchases, #CreateUser, #CreateProduct{
+#Users, #Purchases, #CreateUser, #CreateProduct, #registerCommonClient, #registerCompanyClient{
     display:none;
 }

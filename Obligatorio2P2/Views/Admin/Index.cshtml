@@ -20,6 +20,8 @@
             $("#modifyUsers").click(modifyUsers);
             $("#purchasesBetweenDates").click(purchasesBetweenDates);
             $("#AddUser").click(addUser);
+            $("#AddCommonClient").click(addCommonClient);
+            $("#AddCompanyClient").click(addCompanyClient);
             $("#AddProduct").click(addProduct);
 
             function modifyProducts() {
@@ -28,6 +30,8 @@
                 $("#Purchases").hide();
                 $("#CreateUser").hide();
                 $("#CreateProduct").hide();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").hide();
             }
             function modifyUsers() {
                 $("#Products").hide();
@@ -35,6 +39,8 @@
                 $("#Purchases").hide();
                 $("#CreateUser").hide();
                 $("#CreateProduct").hide();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").hide();
             }
             function purchasesBetweenDates() {
                 $("#Products").hide();
@@ -42,6 +48,8 @@
                 $("#Purchases").show();
                 $("#CreateUser").hide();
                 $("#CreateProduct").hide();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").hide();
             }
             function addUser() {
                 $("#Products").hide();
@@ -49,6 +57,8 @@
                 $("#Purchases").hide();
                 $("#CreateUser").show();
                 $("#CreateProduct").hide();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").hide();
             }
             function addProduct() {
                 $("#Products").hide();
@@ -56,6 +66,26 @@
                 $("#Purchases").hide();
                 $("#CreateUser").hide();
                 $("#CreateProduct").show();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").hide();
+            }
+            function addCommonClient() {
+                $("#Products").hide();
+                $("#Users").hide();
+                $("#Purchases").hide();
+                $("#CreateUser").hide();
+                $("#CreateProduct").hide();
+                $("#registerCommonClient").show();
+                $("#registerCompanyClient").hide();
+            }
+            function addCompanyClient() {
+                $("#Products").hide();
+                $("#Users").hide();
+                $("#Purchases").hide();
+                $("#CreateUser").hide();
+                $("#CreateProduct").hide();
+                $("#registerCommonClient").hide();
+                $("#registerCompanyClient").show();
             }
         });
     </script>
@@ -66,6 +96,8 @@
             <li class="navButtons" id="modifyProducts">Modificar Productos</li>
             <li class="navButtons" id="modifyUsers">Modificar Usuario</li>
             <li class="navButtons" id="AddUser">Agregar Usuario</li>
+            <li class="navButtons" id="AddCommonClient">Agregar Cliente Común</li>
+            <li class="navButtons" id="AddCompanyClient">Agregar Cliente Empresa</li>
             <li class="navButtons" id="purchasesBetweenDates">Compras entre fechas</li>
             <li class="navButtons" id="AddProduct">Crear Producto</li>
             <li class="navButtons" id="logout"><a href="/Home/Logout">Salir</a></li>
@@ -126,7 +158,7 @@
                 <th>Rol</th>
                 <th>IdCliente</th>
             </tr>
-            @foreach(ShopSystem.User user in ViewBag.users)
+            @foreach (ShopSystem.User user in ViewBag.users)
             {
                 <tr>
                     <td>
@@ -149,14 +181,14 @@
             }
         </table>
         <form action="/Admin/ModifyUser" method="get">
-            userId<input type="number" name="userId"/>
+            userId<input type="number" name="userId" />
             role<input type="text" name="role" />
             <button>Modificar rol</button>
         </form>
     </div>
     <div id="CreateUser">
         <p><b>Crear usuario</b></p>
-        <form action="/Admin/CreateUser">
+        <form  class="form-control"action="/Admin/CreateUser">
             usuario<input type="text" name="user" />
             contraseña<input type="password" name="password" />
             nombre<input type="text" name="name" />
@@ -164,14 +196,43 @@
             <button class="btn-primary">Crear usuario</button>
         </form>
     </div>
+    <div id="registerCommonClient">
+        <form class="form-control" action="/Admin/CreateCommonClient" method="post">
+            nombre<input type="text" name="name" />
+            cédula de indentidad<input type="number" name="identificationCard" />
+            celular<input type="text" name="celular" />
+            mail<input type="email" name="mail" />
+            telefono<input type="text" name="phone" />
+            dirección<input type="text" name="address" />
+            usuario<input type="text" name="user" />
+            contraseña<input type="password" name="password" />
+            es de montevideo<select name="isFromMontevideo"><option value="true">true</option><option value="false">false</option></select>
+            <button class="btn-primary">Registrar</button>
+        </form>
+    </div>
+    <div id="registerCompanyClient">
+        <form class="form-control" action="/Admin/CreateCompanyClient" method="post">
+            nombre de empresa<input type="text" name="name" />
+            razón social<input type="text" name="bussinesName" />
+            rut<input type="number" name="rut" />
+            mail<input type="text" name="mail" />
+            telefono<input type="text" name="phone" />
+            direccion<input type="text" name="address" />
+            usuario<input type="text" name="user" />
+            contraseña<input type="text" name="password" />
+            es de montevideo<select name="isFromMontevideo"><option value="true">true</option><option value="false">false</option></select>
+            descuento<input type="number" name="discount">
+            <button class="btn-primary">Registrar</button>
+        </form>
+    </div>
     <div id="Purchases">
-         <p><b>Obtener compras entre las fechas</b></p>
+        <p><b>Obtener compras entre las fechas</b></p>
         <form action="/Admin/GetPurchasesBetweenDates" method="get">
             fecha1<input type="date" name="d1" />
             fecha2<input type="date" name="d2" />
             <button class="btn-primary">Obtener compras</button>
         </form>
-        @if(Session["purchasesBetweenDates"] != null)
+        @if (Session["purchasesBetweenDates"] != null)
         {
             <table class="table">
                 <tr>
@@ -211,9 +272,9 @@
             precio<input type="number" name="price" />
             desripción<input type="text" name="description" />
             es exclusivo<select name="isExclusive">
-                            <option value="true">True</option>
-                            <option value="false">False</option>
-                        </select>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
             cantiidad<input type="number" name="quantity" />
             <button>Crear producto</button>
         </form>
