@@ -1,4 +1,4 @@
-﻿
+﻿@model string
 @{
     Layout = null;
 }
@@ -20,30 +20,42 @@
             $("#modifyUsers").click(modifyUsers);
             $("#purchasesBetweenDates").click(purchasesBetweenDates);
             $("#AddUser").click(addUser);
+            $("#AddProduct").click(addProduct);
 
             function modifyProducts() {
                 $("#Products").show();
                 $("#Users").hide();
                 $("#Purchases").hide();
                 $("#CreateUser").hide();
+                $("#CreateProduct").hide();
             }
             function modifyUsers() {
                 $("#Products").hide();
                 $("#Users").show();
                 $("#Purchases").hide();
                 $("#CreateUser").hide();
+                $("#CreateProduct").hide();
             }
             function purchasesBetweenDates() {
                 $("#Products").hide();
                 $("#Users").hide();
                 $("#Purchases").show();
                 $("#CreateUser").hide();
+                $("#CreateProduct").hide();
             }
             function addUser() {
                 $("#Products").hide();
                 $("#Users").hide();
                 $("#Purchases").hide();
                 $("#CreateUser").show();
+                $("#CreateProduct").hide();
+            }
+            function addProduct() {
+                $("#Products").hide();
+                $("#Users").hide();
+                $("#Purchases").hide();
+                $("#CreateUser").hide();
+                $("#CreateProduct").show();
             }
         });
     </script>
@@ -58,6 +70,9 @@
             <li class="navButtons" id="logout"><a href="/Home/Logout">Salir</a></li>
         </ul>
     </nav>
+    <div>
+        <p>@ViewBag.message</p>
+    </div>
     <div id="Products">
         <p><b>Modificar Productos</b></p>
         <table class="table">
@@ -140,7 +155,7 @@
             contraseña<input type="password" name="password" />
             nombre<input type="text" name="name" />
             rol<input type="text" name="role" />
-            <button>Crear usuario</button>
+            <button class="btn-primary">Crear usuario</button>
         </form>
     </div>
     <div id="Purchases">
@@ -182,6 +197,11 @@
                 }
             </table>
         }
+    </div>
+    <div id="CreateProduct">
+        <form>
+
+        </form>
     </div>
 </body>
 </html>

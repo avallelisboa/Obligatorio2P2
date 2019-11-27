@@ -33,6 +33,7 @@ namespace Obligatorio2P2.Controllers
                 ViewBag.catalogue = productStocks;
                 List<User> users = sys.Users;
                 ViewBag.users = users;
+                ViewBag.message = Convert.ToString(Session["message"]);
                 return View();
             }
             else return Redirect("/Home");
@@ -62,14 +63,26 @@ namespace Obligatorio2P2.Controllers
         {
             SystemControl sys = SystemControl.getSystemControl();
             List<User> _users = sys.Users;
-            sys.addUser(user, password, name, role);
+            SystemControl.registerStatus registerStatus = sys.addUser(user, password, name, role);
+            Session["message"] = registerStatus.message;
+            return Redirect("/Admin/Index");
+        }
+
+        public ActionResult CreateProduct(int catalogueId, string productName, int price, string description, bool isExclusive, int quantity)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            string resultMessage = sys.Catalogue[catalogueId].addProduct(productName, price, description, isExclusive, quantity);
+            Session["message"] = resultMessage;
             return Redirect("/Admin/Index");
         }
 
         public ActionResult GetPurchasesBetweenDates(string d1, string d2)
         {
-            Session["d1"] = d1;
-            Session["d2"] = d2;
+            if (Convert.ToString(Session["role"]) =="admin")
+            {
+                Session["d1"] = d1;
+                Session["d2"] = d2;                
+            }
             return Redirect("/Admin/Index");
         }
     }
