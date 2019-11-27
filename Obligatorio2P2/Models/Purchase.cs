@@ -11,14 +11,16 @@ namespace ShopSystem
         private List<DataProductsToBuy> dataProductsToBuy = new List<DataProductsToBuy>();
         private List<Product> productsToBuy = new List<Product>();
         private int totalPrice = 0;
+        private int id;
         private DateTime date;
         private bool toDeliver;
         private bool paysByCash;
-        private Purchase(Client client, List<ProductStock> productStocks)
+        private Purchase(Client client, List<ProductStock> productStocks, int id)
         {
             this.client = client;
             this.productStocks = productStocks;
             this.date = DateTime.Today;
+            this.id = id;
         }
         public class DataProductsToBuy
         {
@@ -34,15 +36,16 @@ namespace ShopSystem
         public int ProductsQuantity { get { return dataProductsToBuy.Count; } }
         public List<Product> ProductsToBuy { get { return productsToBuy; } }
         public List<DataProductsToBuy> GetDataProductsToBuy { get { return dataProductsToBuy; } }
+        public int Id { get { return id; } }
 
         private int calculatePurchasePrice()
         {
             return totalPrice;
         }
 
-        public static Purchase getPurchase(Client client, List<ProductStock> productStocks)
+        public static Purchase getPurchase(Client client, List<ProductStock> productStocks, int id)
         {
-            return new Purchase(client, productStocks);
+            return new Purchase(client, productStocks, id);
         }
 
         public string buy()

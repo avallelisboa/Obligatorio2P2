@@ -1,7 +1,4 @@
-﻿@model List<ShopSystem.ProductStock>
-@{
-    Layout = null;
-}
+﻿
 
 <!DOCTYPE html>
 
@@ -42,29 +39,40 @@
     </header>
     <section>
         <section id="Catalogue">
-            <table class="table">
-                <tr>
-                    <th>Nombre</th>
-                    <th>IdProducto</th>
-                    <th>Precio</th>
-                    <th>Categoría</th>
-                    <th>IdCategoría</th>
-                </tr>
-                @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
-                {
-                    foreach (ShopSystem.Product p in pS.Products)
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>IdProducto</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>IdCategoría</th>
+                    </tr>
+                    @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
                     {
-                        <tr>
-                            <td>@p.Name</td>
-                            <td>@p.Id</td>
-                            <td>@p.Price</td>
-                            <td>@pS.Name</td>
-                            <td>@pS.StockId</td>
-                        </tr>
-                    }
+                        foreach (ShopSystem.Product p in pS.Products)
+                        {
+                            <tr>
+                                <td>@p.Name</td>
+                                <td>@p.Id</td>
+                                <td>@p.Price</td>
+                                <td>@pS.Name</td>
+                                <td>@pS.StockId</td>
+                            </tr>
+                        }
 
-                }
-            </table>
+                    }
+                </table>
+            </div>
+                <form class="form-control" action="/Client/AddToPurchase" method="get">
+                    id categoría<input name="stockId" type="number" />
+                    id producto<input name="productId" type="number" />
+                    cantidad<input name="quantity" type="number"/>
+                    <button class="btn-primary">Agregar al carrito</button>
+                </form>
+            <div>
+
+            </div>
         </section>
         <section id="Last10Products">
 

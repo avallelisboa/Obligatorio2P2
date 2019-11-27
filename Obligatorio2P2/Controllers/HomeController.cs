@@ -28,6 +28,7 @@ namespace Obligatorio2P2.Controllers
                 Session["user"] = dataUser.UserName;
                 Session["name"] = dataUser.Name;
                 Session["role"] = role;
+                Session["id"] = dataUser.Id;
 
                 switch (role)
                 {

@@ -11,20 +11,23 @@ namespace ShopSystem
         private string password;
         private string name;
         private string role;
+        private int id;
         private Client client;
 
         public string UserName { get { return user; } }
         public string Password { get { return password; } }
         public string Name { get { return name; } }
         public string Role { get { return role; } }
+        public int Id { get { return id; } }
         public Client Client { get { return client; } }
 
-        internal User(string user, string password, string name, string role)
+        public User(string user, string password, string name, string role, int id)
         {
             this.user = user;
             this.password = password;
             this.name = name;
             this.role = role;
+            this.id = id;
         }
 
         public class userValidation

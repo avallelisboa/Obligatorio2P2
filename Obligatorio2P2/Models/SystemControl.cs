@@ -14,8 +14,10 @@ namespace ShopSystem
         private List<ProductStock> catalogue = new List<ProductStock>();                             //Lista de productStocks(las categorías). Para cada categoría hay un productStock
         private List<Purchase> purchases = new List<Purchase>();                                     //Purchases list
         private User loggedUser;
+
         public int NumberOfClients { get { return clients.Count; } }
-        public List<ProductStock> getCatalogue() { return catalogue; }
+        public List<ProductStock> Catalogue { get { return catalogue; } }
+        public List<Purchase> Purchases { get { return purchases;} }
 
         public class registerStatus
         {
@@ -72,7 +74,7 @@ namespace ShopSystem
             bool isUserUsed = isUserInformationCorrect.isUserUsed;
             if (!isUserUsed)
             {
-                User _user = new User(user, password, name, role);
+                User _user = new User(user, password, name, role, id);
                 users.Add(_user);
                 return new registerStatus(true, "El usuario fue registrado correctamente");
             }
@@ -211,16 +213,24 @@ namespace ShopSystem
             return _userLogged;
         }
 
-        public Purchase getPurchase()
+        private Purchase getPurchase()//Unicamente se utiliza para la precagarga
         {
             if (loggedUser != null && loggedUser.Client != null)
             {
-                Purchase _purchase = Purchase.getPurchase(loggedUser.Client, catalogue);
+                Purchase _purchase = Purchase.getPurchase(loggedUser.Client, catalogue, purchases.Count);
                 purchases.Add(_purchase);
                 loggedUser.Client.addPurchase(_purchase);
                 return _purchase;
             }
             else throw new Exception("There is no logged user");
+        }
+
+        public Purchase getPurchase(int id)//Utilizado por el controlador de la web
+        {
+             Purchase _purchase = Purchase.getPurchase(users[id].Client, catalogue, purchases.Count);
+             purchases.Add(_purchase);
+             users[id].Client.addPurchase(_purchase);
+             return _purchase;
         }
 
         public string addProductStock(string name)

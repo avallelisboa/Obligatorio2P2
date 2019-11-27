@@ -12,7 +12,7 @@ namespace Obligatorio2P2.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            if (Session["user"] != null && Session["role"] == "admin")
+            if (Session["user"] != null && Convert.ToString(Session["role"]) == "admin")
             {
                 SystemControl sys = SystemControl.getSystemControl();
                 return View();

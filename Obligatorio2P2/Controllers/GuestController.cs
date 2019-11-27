@@ -12,10 +12,10 @@ namespace Obligatorio2P2.Controllers
         // GET: Guest
         public ActionResult Index()
         {
-            if (Session["user"] != null && Session["role"] == "guest")
+            if (Session["user"] != null && Convert.ToString(Session["role"]) == "guest")
             {
                 SystemControl sys = SystemControl.getSystemControl();
-                List<ProductStock> productStocks = sys.getCatalogue();
+                List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
                 return View();
             }
