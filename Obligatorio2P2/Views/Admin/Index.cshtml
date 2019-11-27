@@ -67,6 +67,7 @@
             <li class="navButtons" id="modifyUsers">Modificar Usuario</li>
             <li class="navButtons" id="AddUser">Agregar Usuario</li>
             <li class="navButtons" id="purchasesBetweenDates">Compras entre fechas</li>
+            <li class="navButtons" id="AddProduct">Crear Producto</li>
             <li class="navButtons" id="logout"><a href="/Home/Logout">Salir</a></li>
         </ul>
     </nav>
@@ -147,6 +148,11 @@
                 </tr>
             }
         </table>
+        <form action="/Admin/ModifyUser" method="get">
+            userId<input type="number" name="userId"/>
+            role<input type="text" name="role" />
+            <button>Modificar rol</button>
+        </form>
     </div>
     <div id="CreateUser">
         <p><b>Crear usuario</b></p>
@@ -199,8 +205,17 @@
         }
     </div>
     <div id="CreateProduct">
-        <form>
-
+        <form action="/Admin/CreateProduct" method="get">
+            catalogueid<input type="number" name="catalogueId" />
+            nombre de producto<input type="text" name="productName" />
+            precio<input type="number" name="price" />
+            desripción<input type="text" name="description" />
+            es exclusivo<select name="isExclusive">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+            cantiidad<input type="number" name="quantity" />
+            <button>Crear producto</button>
         </form>
     </div>
 </body>

@@ -54,6 +54,7 @@ namespace Obligatorio2P2.Controllers
             Session["user"] = null;
             Session["name"] = null;
             Session["role"] = null;
+            Session["idpurchase"] = null;
             return Redirect("/Home/Index");
         }
     }

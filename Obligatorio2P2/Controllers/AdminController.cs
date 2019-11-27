@@ -20,14 +20,13 @@ namespace Obligatorio2P2.Controllers
                     string d1 = Convert.ToString(Session["d1"]);
                     string d2 = Convert.ToString(Session["d2"]);
                     DateTime date1; DateTime date2;
-                    date1 = DateTime.Parse(d1);
-                    date2 = DateTime.Parse(d2);
-                    List<Purchase> purchasesBetweenDates = sys.getPurchasesBetweenDates(date1, date2);
-                    Session["purchasesBetweenDates"] = purchasesBetweenDates;
-                    ViewBag.purchasesBetweenDates = purchasesBetweenDates;
+                    if(DateTime.TryParse(d1, out date1) && DateTime.TryParse(d2, out date2))
+                    {
+                        List<Purchase> purchasesBetweenDates = sys.getPurchasesBetweenDates(date1, date2);
+                        Session["purchasesBetweenDates"] = purchasesBetweenDates;
+                        ViewBag.purchasesBetweenDates = purchasesBetweenDates;
+                    }                   
                 }
-               
-
                 User user = sys.Users[Convert.ToInt32(Session["id"])];
                 List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
@@ -65,6 +64,15 @@ namespace Obligatorio2P2.Controllers
             List<User> _users = sys.Users;
             SystemControl.registerStatus registerStatus = sys.addUser(user, password, name, role);
             Session["message"] = registerStatus.message;
+            return Redirect("/Admin/Index");
+        }
+
+        public ActionResult ModifyUser(int userId, string role)
+        {
+            SystemControl sys = SystemControl.getSystemControl();
+            List<User> _users = sys.Users;
+            string message =  sys.setRole(_users[userId], role);
+            Session["message"] = message;
             return Redirect("/Admin/Index");
         }
 

@@ -57,7 +57,7 @@ namespace ShopSystem
 
         public string setRole(string role)
         {
-            if (role == "Client" || role == "Guest" || role == "Admin")
+            if (role == "client" || role == "guest" || role == "admin")
             {
                 this.role = role;
                 return "El rol fue cambiado correctamente";
