@@ -182,6 +182,9 @@ namespace ShopSystem
             var purchase2 = getPurchase();
             purchase2.addToPurchase(0, 1, 10);
             purchase2.buy();
+            var purchase7 = getPurchase();
+            purchase7.addToPurchase(1, 0, 12);
+            purchase7.buy();
             login("javier", "Javier");
             var purchase3 = getPurchase();
             purchase3.addToPurchase(1, 0, 10);

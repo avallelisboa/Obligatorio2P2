@@ -35,7 +35,7 @@ namespace Obligatorio2P2.Controllers
             }
             else return Redirect("/Home");
         }
-
+        [HttpGet]
         public ActionResult Checkout()
         {
             if(Session["user"]!= null)
@@ -47,6 +47,13 @@ namespace Obligatorio2P2.Controllers
                 Session["resultMessage"] = result;
                 ViewBag.resultMessage = result;
             }
+            return Redirect("/Client/Index");
+        }
+
+        public ActionResult ConfirmCheckout()
+        {
+            Session["resultMessage"] = null;
+            Session["idpurchase"] = null;
             return Redirect("/Client/Index");
         }
 

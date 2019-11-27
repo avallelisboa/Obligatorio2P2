@@ -106,6 +106,10 @@
                                 <td>@ViewBag.resultMessage</td>
                                 }
                             </form>
+                            @if(Session["resultMessage"] != null)
+                            {
+                                <td><a href="/Client/ConfirmCheckout">Pagar</a></td>
+                            }
                         </tr>
                     </table>
                     
