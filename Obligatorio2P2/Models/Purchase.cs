@@ -57,7 +57,6 @@ namespace ShopSystem
                 int productId = dataProductsToBuy[i].productId;
                 int stockId = dataProductsToBuy[i].stockId;
                 int quantity = dataProductsToBuy[i].quantity;
-                productsToBuy.Add(productStocks[stockId].Products[productId]);
                 productStocks[stockId].removeProduct(productId, quantity);
             }
             if (paysByCash && totalPrice > 5000) discount += 4;
@@ -73,6 +72,7 @@ namespace ShopSystem
         public string addToPurchase(int stockId, int productId, int quantity)
         {
             var _product = productStocks[stockId].addToPurchase(quantity, productId);
+            productsToBuy.Add(productStocks[stockId].Products[productId]);
             if (_product.wasAdded)
             {
                 DataProductsToBuy p = new DataProductsToBuy();

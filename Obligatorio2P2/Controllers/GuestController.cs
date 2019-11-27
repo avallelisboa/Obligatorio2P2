@@ -15,6 +15,7 @@ namespace Obligatorio2P2.Controllers
             if (Session["user"] != null && Convert.ToString(Session["role"]) == "guest")
             {
                 SystemControl sys = SystemControl.getSystemControl();
+                User user = sys.Users[Convert.ToInt32(Session["id"])];
                 List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
                 return View();

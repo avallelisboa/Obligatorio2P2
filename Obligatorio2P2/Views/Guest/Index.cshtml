@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Invitado</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <a href="/Home/Logout">Salir</a>
+    <div id="Products">
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>IdProducto</th>
+                <th>Precio</th>
+                <th>Cantidad disponible</th>
+                <th>Categoría</th>
+                <th>IdCategoría</th>
+            </tr>
+            @foreach (ShopSystem.ProductStock pS in ViewBag.catalogue)
+            {
+                foreach (ShopSystem.Product p in pS.Products)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td>@p.Id</td>
+                        <td>@p.Price</td>
+                        <td>@p.Quantity</td>
+                        <td>@pS.Name</td>
+                        <td>@pS.StockId</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</body>
+</html>

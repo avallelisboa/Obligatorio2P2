@@ -18,6 +18,7 @@ namespace ShopSystem
         public int NumberOfClients { get { return clients.Count; } }
         public List<ProductStock> Catalogue { get { return catalogue; } }
         public List<Purchase> Purchases { get { return purchases;} }
+        public List<User> Users { get { return users; } }
 
         public class registerStatus
         {
@@ -153,6 +154,9 @@ namespace ShopSystem
             addUser("company3", "company3", "company3", "client");
             addCompanyClient("company3", "company3 s.a.", 346456148, "company3@gmail.com", "324564561551", "Luis Alberto de Herrera 878456456", "company3", "company3", false, 5);
             users[5].setClient(clients[5]);
+
+            addUser("admin", "admin", "Leonardo", "admin");
+            addUser("invitado", "invitado", "Ralph", "guest");
 
             addProductStock("Frescos"); addProductStock("Congelados"); addProductStock("Hogar"); addProductStock("Téxtiles"); addProductStock("Tecnología"); //Categorías precargadas(1 ProductStock para cada categoría)
 

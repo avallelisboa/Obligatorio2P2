@@ -9,20 +9,26 @@ namespace Obligatorio2P2.Controllers
 {
     public class ClientController : Controller
     {
-        // GET: Client
+        [HttpGet]
         public ActionResult Index()
         {
             if (Session["user"] != null && Convert.ToString(Session["role"]) == "client")
             {
                 SystemControl sys = SystemControl.getSystemControl();
+                User user = sys.Users[Convert.ToInt32(Session["id"])];
+                List<Product> products = sys.getLast10Products(user.Client);
+                ViewBag.products = products;
+                List<Product> mostBought = sys.getMostBoughtProducts(user.Client);
+                ViewBag.mostBought = mostBought;
                 List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
-                if(Session["idpurchase"] != null)
+                if (Session["idpurchase"] != null)
                 {
-                    Purchase _purchase = getPurchase();
-                    ViewBag.purchase = _purchase;
+                    int purchaseId = Convert.ToInt32(Session["idpurchase"]);
+                    Purchase _purchase = sys.Purchases[purchaseId];
+                    return View(_purchase);
                 }
-                return View();
+                else return View();
             }
             else return Redirect("/Home");
         }
@@ -44,7 +50,7 @@ namespace Obligatorio2P2.Controllers
                     _purchase = sys.Purchases[Convert.ToInt32(Session["idpurchase"])];
                 }
                 _purchase.addToPurchase(stockId, productId, quantity);
-                return Redirect("/Client/Index");
+                return Redirect("/Client/Index/");
             }
             else
             {
