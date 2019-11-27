@@ -66,7 +66,7 @@ namespace ShopSystem
             else if (client.GetType() == typeof(Company)) discount += ((Company)client).Discount;
             totalPrice = (100 - discount) * totalPrice / 100;
             if (!(client.IsFromMontevideo) && toDeliver) totalPrice += 1000;
-            return "You must pay $" + totalPrice;
+            return "Debe pagar $" + totalPrice;
         }
 
         public string addToPurchase(int stockId, int productId, int quantity)

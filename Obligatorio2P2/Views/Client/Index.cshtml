@@ -1,7 +1,6 @@
 ﻿@model ShopSystem.Purchase
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8" />
@@ -65,49 +64,57 @@
 
                     }
                 </table>
-            </div>
-                <form class="form-control" action="/Client/AddToPurchase" method="get">
-                    id categoría<input name="stockId" type="number" />
-                    id producto<input name="productId" type="number" />
-                    cantidad<input name="quantity" type="number"/>
-                    <button class="btn-primary">Agregar al carrito</button>
-                </form>
-                <div>
-                    @if (Session["idpurchase"] != null)
-                    {
-                        <table class="table">
+            <form class="form-control" action="/Client/AddToPurchase" method="get">
+                id categoría<input name="stockId" type="number" />
+                id producto<input name="productId" type="number" />
+                cantidad<input name="quantity" type="number" />
+                <button class="btn-primary">Agregar al carrito</button>
+            </form>
+            </div>                
+            <div>
+                @if (Session["idpurchase"] != null)
+                {
+                    <table class="table">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                        @{
+                            int count = Model.ProductsToBuy.Count;
+                            int totalPrice = 0;
+                        }
+                        @for (int i = 0; i < count; i++)
+                        {
+                            List<ShopSystem.Product> products = Model.ProductsToBuy;
+                            int price = products[i].Price;
+                            int number = Model.GetDataProductsToBuy[i].quantity;
+                            totalPrice += price * count;
                             <tr>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
+                                <td>@products[i].Name</td>
+                                <td>@price</td>
+                                <td>@number</td>
                             </tr>
-                            @{ 
-                                int count = Model.ProductsToBuy.Count;
-                                int totalPrice = 0;
-                            }
-                            @for(int i=0; i < count; i++)
-                            {
-                                List<ShopSystem.Product> products = Model.ProductsToBuy;
-                                int price = products[i].Price;
-                                int number = Model.GetDataProductsToBuy[i].quantity;
-                                totalPrice += price * count;
-                                <tr>
-                                    <td>@products[i].Name</td>                                
-                                    <td>@price</td>                               
-                                    <td>@number</td>
-                                </tr>
-                            }
-                            <tr>
+                        }
+                        <tr>
+                            <form action="/Client/Checkout" method="get">
                                 <th>Precio total</th>
                                 <th>@totalPrice</th>
-                                <td><a class="btn-link">Comprar</a></td>
-                            </tr>
-                        </table>
-                    }
-                </div>
+                                <td><button class="btn-primary">Comprar</button></td>
+                                @if (Session["resultMessage"] != null)
+                                {
+                                <td>@ViewBag.resultMessage</td>
+                                }
+                            </form>
+                        </tr>
+                    </table>
+                    
+                }
+            </div>
         </section>
         <section id="Last10Products">
             <div>
+                <hr />
                 <p><b>Últimos 10 productos</b></p>
                 <table>
                     <tr>
@@ -146,6 +153,11 @@
                         </tr>
                     }
                 </table>
+            </div>
+            <div>
+                <hr />
+                <p><b>Última compra fue realizada el</b></p>
+                <p>@ViewBag.dateLastPurchase</p>
             </div>
         </section>
     </section>

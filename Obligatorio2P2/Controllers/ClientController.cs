@@ -16,12 +16,15 @@ namespace Obligatorio2P2.Controllers
             {
                 SystemControl sys = SystemControl.getSystemControl();
                 User user = sys.Users[Convert.ToInt32(Session["id"])];
-                List<Product> products = sys.getLast10Products(user.Client);
+                List<Product> products = sys.getLast10Products(user.Client);//Obtener últimas 10 compras
                 ViewBag.products = products;
-                List<Product> mostBought = sys.getMostBoughtProducts(user.Client);
+                List<Product> mostBought = sys.getMostBoughtProducts(user.Client);//Obtener productos más comprados
                 ViewBag.mostBought = mostBought;
+                DateTime _datePurchase = sys.getDateLastPurchase(user.Client);
+                ViewBag.dateLastPurchase = _datePurchase;
                 List<ProductStock> productStocks = sys.Catalogue;
                 ViewBag.catalogue = productStocks;
+                ViewBag.resultMessage = Convert.ToString(Session["resultMessage"]);
                 if (Session["idpurchase"] != null)
                 {
                     int purchaseId = Convert.ToInt32(Session["idpurchase"]);
@@ -31,6 +34,20 @@ namespace Obligatorio2P2.Controllers
                 else return View();
             }
             else return Redirect("/Home");
+        }
+
+        public ActionResult Checkout()
+        {
+            if(Session["user"]!= null)
+            {
+                SystemControl sys = SystemControl.getSystemControl();
+                int purchaseId = Convert.ToInt32(Session["idpurchase"]);
+                Purchase _purchase = sys.Purchases[purchaseId];
+                string result = _purchase.buy();
+                Session["resultMessage"] = result;
+                ViewBag.resultMessage = result;
+            }
+            return Redirect("/Client/Index");
         }
 
         [HttpGet]
